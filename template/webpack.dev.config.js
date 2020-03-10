@@ -2,7 +2,7 @@ const webpackMerge = require('webpack-merge');
 const openBrowser = require('./openBrowser');
 const baseConfig = require('./webpack.base.config');
 
-module.exports = {
+module.exports = webpackMerge(baseConfig, {
   mode: 'development',
 
   devtool: 'eval',
@@ -33,4 +33,4 @@ module.exports = {
       openBrowser();
     },
   }
-}
+})

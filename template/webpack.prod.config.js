@@ -6,6 +6,11 @@ const OptimizeWebpack = require('optimize-css-assets-webpack-plugin')
 module.exports = webpackMerge(baseConfig, {
   mode: 'production',
 
+  output: {
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js'
+  },  
+
   devtool: 'none',
 
   module: {

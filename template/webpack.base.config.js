@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/index.js',
 
   output: {
-    path: 'dist',
+    path: path.resolve(process.cwd(), 'dist'),
     filename: '[name].[hash].js',
     chunkFilename: '[name].[chunkhash].js',
     hashDigestLength: 8,
@@ -20,7 +20,7 @@ module.exports = {
           {
             exclude: /node_modules/,
             use: [
-              'css-loader',
+              'style-loader',
               {
                 loader: 'css-loader',
                 options: {
@@ -32,7 +32,7 @@ module.exports = {
           {
             include: /node_modules/,
             use: [
-              'css-loader',
+              'style-loader',
               'css-loader'
             ]
           }
@@ -61,14 +61,14 @@ module.exports = {
         use: ['file-loader?name=[hash:base64:7].[ext]'],
       }
     ]
-  }
+  },
 
   resolve: {
     modules: ['node_modules'],
 
     extensions: ['.js', '.json', '.jsx'],
 
-    mainField: ['browser', 'module', 'main'],
+    mainFields: ['browser', 'module', 'main'],
 
     mainFiles: ['index'],
   },
