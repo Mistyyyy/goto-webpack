@@ -10,7 +10,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["webpack", "configuration"],
+  "keywords": [
+    "webpack",
+    "configuration"
+  ],
   "author": "",
   "license": "ISC"
 }

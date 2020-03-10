@@ -2,7 +2,7 @@
   "name": "quick-webpack",
   "version": "1.0.0",
   "description": "",
-  "bin": "index.js",
+  "main": "index.js",
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
