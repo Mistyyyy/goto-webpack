@@ -26,8 +26,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --config ./env/webpack.dev.config.js",
-    "build": "webpack --config ./env/webpack.prod.config.js"
+    "dev": "webpack-dev-server --config ./webpackConfig/webpack.dev.config.js",
+    "build": "webpack --config ./webpackConfig/webpack.prod.config.js"
   },
   "keywords": [],
   "author": "",

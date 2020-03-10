@@ -1,7 +1,7 @@
 {
   "name": "quick-webpack",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "To generate webpack config quickly",
   "bin": "index.js",
   "dependencies": {
     "ansi-colors": "^4.1.1",
@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["webpack", "configuration"],
   "author": "",
   "license": "ISC"
 }

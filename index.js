@@ -60,23 +60,23 @@ function scaffold(answers) {
     const base = fs.readFileSync(resolveTemplate("./webpack.base.config.js")).toString();
     const dev = fs.readFileSync(resolveTemplate('./webpack.dev.config.js')).toString();
     const prod = fs.readFileSync(resolveTemplate('./webpack.prod.config.js')).toString();
-    const openBrowser = fs.readFileSync(resolveTemplate('./webpack.dev.config.js')).toString();
+    const openBrowser = fs.readFileSync(resolveTemplate('./openBrowser.js')).toString();
 
 
     try {
-        fs.mkdirSync('env')
+        fs.mkdirSync('webpackConfig')
         fs.mkdirSync('src')
     } catch {
-        info('The env and src dir has existed')
+        info('The webpackConfig and src dir has existed')
     }
 
     fs.writeFileSync(resolveUser('./src/index.js'), JSON.stringify())
     fs.writeFileSync(resolveUser("./package.json"), JSON.stringify(packageJSON, null, 2));
     fs.writeFileSync(resolveUser("./.babelrc"), babel);
-    fs.writeFileSync(resolveUser("./env/webpack.base.config.js"), base);
-    fs.writeFileSync(resolveUser("./env/webpack.dev.config.js"), dev);
-    fs.writeFileSync(resolveUser("./env/webpack.prod.config.js"), prod);
-    fs.writeFileSync(resolveUser("./env/openBrowser.js"), openBrowser);
+    fs.writeFileSync(resolveUser("./webpackConfig/webpack.base.config.js"), base);
+    fs.writeFileSync(resolveUser("./webpackConfig/webpack.dev.config.js"), dev);
+    fs.writeFileSync(resolveUser("./webpackConfig/webpack.prod.config.js"), prod);
+    fs.writeFileSync(resolveUser("./webpackConfig/openBrowser.js"), openBrowser);
     done();
 }
 
