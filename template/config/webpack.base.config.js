@@ -20,7 +20,7 @@ module.exports = {
           {
             exclude: /node_modules/,
             use: [
-              MiniCssExtractPlugin.loader,
+              'css-loader',
               {
                 loader: 'css-loader',
                 options: {
@@ -32,7 +32,7 @@ module.exports = {
           {
             include: /node_modules/,
             use: [
-              MiniCssExtractPlugin.loader,
+              'css-loader',
               'css-loader'
             ]
           }
