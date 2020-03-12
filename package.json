@@ -10,11 +10,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "homepage": "https://github.com/Mistyyyy/goto-webpack",
+  "author": "harley",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mistyyyy/goto-webpack.git"
+  },
   "keywords": [
     "webpack",
     "configuration"
   ],
-  "author": "",
   "license": "ISC",
   "devDependencies": {
     "cz-conventional-changelog": "^3.1.0"
