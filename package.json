@@ -1,5 +1,5 @@
 {
-  "name": "quick-webpack",
+  "name": "goto-webpack",
   "version": "0.0.2",
   "description": "To generate webpack config quickly",
   "bin": "index.js",
