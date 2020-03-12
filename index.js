@@ -41,7 +41,7 @@ function start() {
 }
 
 async function question() {
-    info("Details of your scaffold");
+    info("Details of your project");
     let answers = {};
     const details = await inquirer.prompt(QUESTIONS);
     answers = {answers, ...details};
@@ -49,7 +49,7 @@ async function question() {
 }
 
 function scaffold(answers) {
-    info("Scaffolding files ...");
+    info("downloading files ...");
     const packageJSON = require("./template/package.json");
 
     packageJSON.name = PRIJECT_NAME;
@@ -83,7 +83,11 @@ function scaffold(answers) {
 function install() {
     info("Installing Dependencies");
     l(c.gray("  May take few minutes..."));
-    execSync(`cd ${USER_DIRECTORY} && npm install`);
+    try {
+        execSync(`cd ${USER_DIRECTORY} && yarn install`);
+    } catch (err) {
+        execSync(`cd ${USER_DIRECTORY} && npm install`);
+    }
     done();
 }
 
