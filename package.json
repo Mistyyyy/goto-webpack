@@ -1,6 +1,6 @@
 {
   "name": "goto-webpack",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "To generate webpack config quickly",
   "bin": "index.js",
   "dependencies": {
