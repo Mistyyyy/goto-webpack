@@ -48,6 +48,7 @@ module.exports = {
       },
       {
         test: /\.m?jsx?/,
+        exclude: /node_modules/,
         use: [
           'babel-loader?cacheDirectory'
         ]
