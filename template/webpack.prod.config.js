@@ -1,17 +1,17 @@
-const webpackMerge = require('webpack-merge');
-const baseConfig = require('./webpack.base.config');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeWebpack = require('optimize-css-assets-webpack-plugin')
+const webpackMerge = require("webpack-merge");
+const baseConfig = require("./webpack.base.config");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeWebpack = require("optimize-css-assets-webpack-plugin");
 
 module.exports = webpackMerge(baseConfig, {
-  mode: 'production',
+  mode: "production",
 
   output: {
-    filename: '[name].[contenthash].js',
-    chunkFilename: '[name].[contenthash].js'
-  },  
+    filename: "[name].[contenthash].js",
+    chunkFilename: "[name].[contenthash].js"
+  },
 
-  devtool: 'none',
+  devtool: "none",
 
   module: {
     rules: [
@@ -23,22 +23,19 @@ module.exports = webpackMerge(baseConfig, {
             use: [
               MiniCssExtractPlugin.loader,
               {
-                loader: 'css-loader',
+                loader: "css-loader",
                 options: {
-                  module: true,
+                  modules: true
                 }
               }
             ]
           },
           {
             include: /node_modules/,
-            use: [
-              MiniCssExtractPlugin.loader,
-              'css-loader'
-            ]
+            use: [MiniCssExtractPlugin.loader, "css-loader"]
           }
         ]
-      },
+      }
     ]
   },
 
@@ -46,11 +43,11 @@ module.exports = webpackMerge(baseConfig, {
     minimize: true,
     noEmitOnErrors: true,
     runtimeChunk: {
-      name: 'manifest',
+      name: "manifest"
     },
     namedModules: true,
     namedChunks: true,
-    moduleIds: 'named',
+    moduleIds: "named",
     removeAvailableModules: false,
     removeEmptyChunks: true,
     mergeDuplicateChunks: true,
@@ -70,12 +67,12 @@ module.exports = webpackMerge(baseConfig, {
       cacheGroups: {
         common: {
           test: /[\\/](node_modules)[\\/]/,
-          name: 'common',
+          name: "common",
           maxSize: 200000,
           minSize: 0,
-          chunks: 'initial',
-          filename: '[name].chunk.js',
-          enforce: false,
+          chunks: "initial",
+          filename: "[name].chunk.js",
+          enforce: false
         }
       }
     }
@@ -83,8 +80,8 @@ module.exports = webpackMerge(baseConfig, {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].[ext]'
+      filename: "css/[name].[contenthash].[ext]"
     }),
     new OptimizeWebpack()
   ]
-})
+});
