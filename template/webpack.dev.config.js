@@ -32,5 +32,5 @@ module.exports = webpackMerge(baseConfig, {
     after: () => {
       openBrowser();
     },
-  }
-})
+  },
+});
