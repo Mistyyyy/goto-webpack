@@ -57,6 +57,11 @@ function scaffold(answers) {
     packageJSON.author = answers.author;
 
     const babel = fs.readFileSync(resolveTemplate("./.babelrc")).toString();
+    const editor = fs.readFileSync(resolveTemplate("./.editorconfig")).toString();
+    const eslint = fs.readFileSync(resolveTemplate("./.eslintrc.js")).toString();
+    const gitIgnore = fs.readFileSync(resolveTemplate("./.gitignore")).toString();
+    const prettier = fs.readFileSync(resolveTemplate("./.prettierrc.js")).toString();
+    const prettierIgonre = fs.readFileSync(resolveTemplate("./.prettierignore")).toString();
     const base = fs.readFileSync(resolveTemplate("./webpack.base.config.js")).toString();
     const dev = fs.readFileSync(resolveTemplate('./webpack.dev.config.js')).toString();
     const prod = fs.readFileSync(resolveTemplate('./webpack.prod.config.js')).toString();
@@ -73,6 +78,11 @@ function scaffold(answers) {
     fs.writeFileSync(resolveUser('./src/index.js'), JSON.stringify())
     fs.writeFileSync(resolveUser("./package.json"), JSON.stringify(packageJSON, null, 2));
     fs.writeFileSync(resolveUser("./.babelrc"), babel);
+    fs.writeFileSync(resolveUser("./.editorconfig"), editor);
+    fs.writeFileSync(resolveUser("./.eslintrc.js"), eslint);
+    fs.writeFileSync(resolveUser("./.gitignore"), gitIgnore);
+    fs.writeFileSync(resolveUser("./.prettierrc.js"), prettier);
+    fs.writeFileSync(resolveUser("./.prettierignore.js"), prettierIgonre);
     fs.writeFileSync(resolveUser("./webpackConfig/webpack.base.config.js"), base);
     fs.writeFileSync(resolveUser("./webpackConfig/webpack.dev.config.js"), dev);
     fs.writeFileSync(resolveUser("./webpackConfig/webpack.prod.config.js"), prod);
