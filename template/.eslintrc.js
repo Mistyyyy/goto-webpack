@@ -2,9 +2,11 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    node: true,
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:prettier/recommended',
     'airbnb',
   ],
   globals: {
@@ -18,9 +20,8 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
   },
 };
