@@ -42,7 +42,7 @@ function executeNodeScript(scriptPath, url) {
   const child = spawn('node', [scriptPath, ...extraArgs, url], {
     stdio: 'inherit',
   });
-  child.on('close', code => {
+  child.on('close', (code) => {
     if (code !== 0) {
       // console.log();
       // console.log(chalk.red('The script specified as BROWSER environment variable failed.'));
@@ -58,8 +58,7 @@ function startBrowserProcess(browser, url) {
   // requested a different browser, we can try opening
   // Chrome with AppleScript. This lets us reuse an
   // existing tab when possible instead of creating a new one.
-  const shouldTryOpenChromeWithAppleScript =
-    process.platform === 'darwin' && (typeof browser !== 'string' || browser === OSX_CHROME);
+  const shouldTryOpenChromeWithAppleScript = process.platform === 'darwin' && (typeof browser !== 'string' || browser === OSX_CHROME);
 
   if (shouldTryOpenChromeWithAppleScript) {
     try {
