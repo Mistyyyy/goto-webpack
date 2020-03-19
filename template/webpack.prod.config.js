@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeWebpack = require('optimize-css-assets-webpack-plugin');
 const baseConfig = require('./webpack.base.config');
 
+
 module.exports = webpackMerge(baseConfig, {
   mode: 'production',
 
@@ -24,8 +25,8 @@ module.exports = webpackMerge(baseConfig, {
               loader: 'css-loader',
               options: {
                 modules: true,
-              },
-            },
+              }
+            }
           ],
         },
         {
@@ -33,7 +34,7 @@ module.exports = webpackMerge(baseConfig, {
           use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
       ],
-    }, ],
+    }]
   },
 
   optimization: {
@@ -82,3 +83,5 @@ module.exports = webpackMerge(baseConfig, {
     new OptimizeWebpack(),
   ],
 })
+
+console.log(module.exports)

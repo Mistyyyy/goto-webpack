@@ -7,6 +7,29 @@ module.exports = webpackMerge(baseConfig, {
 
   devtool: 'eval',
 
+  module: {
+    rules: [{
+      test: /\.css$/,
+      oneOf: [{
+          exclude: /node_modules/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+              }
+            ],
+          },
+          {
+            include: /node_modules/,
+            use: ['style-loader', 'css-loader'],
+          },
+        ],
+      },
+    }]
+  }
+
   devServer: {
     hot: true,
     open: true,
