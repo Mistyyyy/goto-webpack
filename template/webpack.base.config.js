@@ -14,28 +14,8 @@ module.exports = {
 
   module: {
     rules: [{
-        test: /\.css$/,
-        oneOf: [{
-            exclude: /node_modules/,
-            use: [
-              'style-loader',
-              {
-                loader: 'css-loader',
-                options: {
-                  modules: true,
-                },
-              },
-            ],
-          },
-          {
-            include: /node_modules/,
-            use: ['style-loader', 'css-loader'],
-          },
-        ],
-      },
-      {
         test: /\.less/,
-        use: ['less-loader', 'style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
       {
         test: /\.m?jsx?/,
