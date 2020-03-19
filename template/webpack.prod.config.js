@@ -14,29 +14,26 @@ module.exports = webpackMerge(baseConfig, {
   devtool: 'none',
 
   module: {
-    rules: [
-      {
-        test: /\.css$/,
-        oneOf: [
-          {
-            exclude: /node_modules/,
-            use: [
-              MiniCssExtractPlugin.loader,
-              {
-                loader: 'css-loader',
-                options: {
-                  modules: true,
-                },
+    rules: [{
+      test: /\.css$/,
+      oneOf: [{
+          exclude: /node_modules/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
               },
-            ],
-          },
-          {
-            include: /node_modules/,
-            use: [MiniCssExtractPlugin.loader, 'css-loader'],
-          },
-        ],
-      },
-    ],
+            },
+          ],
+        },
+        {
+          include: /node_modules/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+      ],
+    }, ],
   },
 
   optimization: {
@@ -80,7 +77,7 @@ module.exports = webpackMerge(baseConfig, {
 
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].[ext]',
+      filename: 'css/[name].[contenthash].css',
     }),
     new OptimizeWebpack(),
   ],
