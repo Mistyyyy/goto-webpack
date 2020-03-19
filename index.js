@@ -4,38 +4,75 @@ const c = require("ansi-colors");
 const inquirer = require("inquirer");
 const { execSync } = require("child_process");
 const fs = require("fs");
-const { resolve, parse } = require("path");
+const { resolve, parse, join } = require("path");
 
 const USER_DIRECTORY = process.env.PWD ? process.env.PWD : process.cwd();
-const PRIJECT_NAME = parse(USER_DIRECTORY).name
+const PRIJECT_NAME = parse(USER_DIRECTORY).name;
 const TEMPLATE_DIRECTORY = resolve(__dirname, "template");
-const QUESTIONS = [{
+const QUESTIONS = [
+  {
     type: "input",
     prefix: c.greenBright(">"),
     default: "",
     message: "Enter description of your project:",
-    name: "description",
+    name: "description"
   },
   {
     type: "input",
     prefix: c.greenBright(">"),
     default: "",
     message: "What is your name?",
-    name: "author",
-  },
+    name: "author"
+  }
 ];
 
-const resolveTemplate = (path) => resolve(TEMPLATE_DIRECTORY, path);
-const resolveUser = (path) => resolve(USER_DIRECTORY, path);
-const l = (message) => { console.log(message); };
-const info = (message) => { l(c.bold("\n" + c.blue("i") + c.italic(` ${message}`))); }
-const done = () => { l(c.greenBright("\u2713 Done")); };
+const CURRENT_PREFIX = ".";
+const resolveTemplate = path => resolve(TEMPLATE_DIRECTORY, path);
+const resolveUser = path => resolve(USER_DIRECTORY, path);
+const l = message => {
+  console.log(message);
+};
+const info = message => {
+  l(c.bold("\n" + c.blue("i") + c.italic(` ${message}`)));
+};
+const done = () => {
+  l(c.greenBright("\u2713 Done"));
+};
+const read = list =>
+  list.map(filename => [
+    filename,
+    fs.readFileSync(resolveTemplate(join(CURRENT_PREFIX, filename))).toString()
+  ]);
+const READ_FILE_LIST = [
+  ".babelrc",
+  ".editorconfig",
+  ".eslintrc.js",
+  ".gitignore",
+  ".prettierrc.js",
+  ".prettierignore",
+  "webpack.base.config.js",
+  "webpack.dev.config.js",
+  "webpack.prod.config.js",
+  "openBrowser.js"
+];
+const CONFIG_FILE_LIST = [
+  "webpack.base.config.js",
+  "webpack.dev.config.js",
+  "webpack.prod.config.js",
+  "openBrowser.js"
+];
 
+const write = (files, callback) => {
+  files.forEach(([file, content]) => {
+    let filePath = join(CURRENT_PREFIX, file);
+    if (callback(file)) filePath = callback(file);
+
+    fs.writeFileSync(resolveUser(filePath), content);
+  });
+};
 
 function start() {
-  l(
-    `${c.blueBright("quick webpack start working")}`
-  )
+  l(`${c.blueBright("quick webpack start working")}`);
 }
 
 async function question() {
@@ -54,37 +91,24 @@ function scaffold(answers) {
   packageJSON.description = answers.description;
   packageJSON.author = answers.author;
 
-  const babel = fs.readFileSync(resolveTemplate("./.babelrc")).toString();
-  const editor = fs.readFileSync(resolveTemplate("./.editorconfig")).toString();
-  const eslint = fs.readFileSync(resolveTemplate("./.eslintrc.js")).toString();
-  const gitIgnore = fs.readFileSync(resolveTemplate("./.gitignore")).toString();
-  const prettier = fs.readFileSync(resolveTemplate("./.prettierrc.js")).toString();
-  const prettierIgonre = fs.readFileSync(resolveTemplate("./.prettierignore")).toString();
-  const base = fs.readFileSync(resolveTemplate("./webpack.base.config.js")).toString();
-  const dev = fs.readFileSync(resolveTemplate('./webpack.dev.config.js')).toString();
-  const prod = fs.readFileSync(resolveTemplate('./webpack.prod.config.js')).toString();
-  const openBrowser = fs.readFileSync(resolveTemplate('./openBrowser.js')).toString();
-
+  const readFileResult = read(READ_FILE_LIST);
 
   try {
-    fs.mkdirSync('webpackConfig')
-    fs.mkdirSync('src')
+    fs.mkdirSync("webpackConfig");
+    fs.mkdirSync("src");
   } catch {
-    info('The webpackConfig and src dir has existed')
+    info("The webpackConfig and src dir has existed");
   }
 
-  fs.writeFileSync(resolveUser('./src/index.js'), JSON.stringify())
-  fs.writeFileSync(resolveUser("./package.json"), JSON.stringify(packageJSON, null, 2));
-  fs.writeFileSync(resolveUser("./.babelrc"), babel);
-  fs.writeFileSync(resolveUser("./.editorconfig"), editor);
-  fs.writeFileSync(resolveUser("./.eslintrc.js"), eslint);
-  fs.writeFileSync(resolveUser("./.gitignore"), gitIgnore);
-  fs.writeFileSync(resolveUser("./.prettierrc.js"), prettier);
-  fs.writeFileSync(resolveUser("./.prettierignore.js"), prettierIgonre);
-  fs.writeFileSync(resolveUser("./webpackConfig/webpack.base.config.js"), base);
-  fs.writeFileSync(resolveUser("./webpackConfig/webpack.dev.config.js"), dev);
-  fs.writeFileSync(resolveUser("./webpackConfig/webpack.prod.config.js"), prod);
-  fs.writeFileSync(resolveUser("./webpackConfig/openBrowser.js"), openBrowser);
+  fs.writeFileSync(resolveUser("./src/index.js"), JSON.stringify());
+  fs.writeFileSync(
+    resolveUser("./package.json"),
+    JSON.stringify(packageJSON, null, 2)
+  );
+  write(readFileResult, file => {
+    if (CONFIG_FILE_LIST.includes(file))
+      return join(CURRENT_PREFIX, "webpackConfig", file);
+  });
   done();
 }
 
@@ -105,7 +129,8 @@ function footer() {
     Your Project has created!
     - ${c.blue(`Learn how to config webpack:
       https://https://webpack.js.org/configuration/`)}
-`)
+`
+  );
 }
 
 (async () => {
