@@ -34,9 +34,7 @@ const done = () => { l(c.greenBright("\u2713 Done")); };
 
 function start() {
   l(
-    `
-        ${c.blueBright("quick webpack start working")}
-`
+    `${c.blueBright("quick webpack start working")}`
   )
 }
 
