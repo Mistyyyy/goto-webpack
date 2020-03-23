@@ -2,6 +2,9 @@ const webpackMerge = require('webpack-merge');
 const openBrowser = require('./openBrowser');
 const baseConfig = require('./webpack.base.config');
 
+process.env.HOST = '0.0.0.0';
+process.env.port = 10000;
+
 module.exports = webpackMerge(baseConfig, {
   mode: 'development',
 
@@ -42,8 +45,8 @@ module.exports = webpackMerge(baseConfig, {
       errors: true,
     },
     serveIndex: true,
-    host: '0.0.0.0',
-    port: 10000,
+    host: process.env.HOST,
+    port: process.env.PORT,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
