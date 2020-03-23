@@ -1,4 +1,5 @@
 const webpackMerge = require('webpack-merge');
+const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const openBrowser = require('./openBrowser');
 const baseConfig = require('./webpack.base.config');
 
@@ -32,6 +33,10 @@ module.exports = webpackMerge(baseConfig, {
       ],
     }]
   },
+
+  plugins: [
+
+  ],
 
   devServer: {
     hot: true,
