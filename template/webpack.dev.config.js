@@ -1,5 +1,5 @@
 const webpackMerge = require('webpack-merge');
-const NpmInstallPlugin = require('npm-install-webpack-plugin');
+// const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const openBrowser = require('./openBrowser');
 const baseConfig = require('./webpack.base.config');
 
@@ -22,8 +22,8 @@ module.exports = webpackMerge(baseConfig, {
               loader: 'css-loader',
               options: {
                 modules: true,
-              }
-            }
+              },
+            },
           ],
         },
         {
@@ -31,16 +31,14 @@ module.exports = webpackMerge(baseConfig, {
           use: ['style-loader', 'css-loader'],
         },
       ],
-    }]
+    }, ],
   },
 
-  plugins: [
-
-  ],
+  plugins: [],
 
   devServer: {
     hot: true,
-    open: true,
+    // open: true,
     compress: true,
     disableHostCheck: true,
     historyApiFallback: true,
@@ -56,9 +54,7 @@ module.exports = webpackMerge(baseConfig, {
       'Access-Control-Allow-Origin': '*',
     },
     index: 'index.html',
-    proxy: {
-
-    },
+    proxy: {},
     publicPath: '/',
     after: () => {
       openBrowser();
