@@ -97,4 +97,4 @@ module.exports = webpackMerge(baseConfig, {
   ),
 });
 
-module.exports = smp(module.exports)
+module.exports = smp.wrap(module.exports)
