@@ -1,7 +1,16 @@
 const webpackMerge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeWebpack = require('optimize-css-assets-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const baseConfig = require('./webpack.base.config');
+
+const smp = process.env.NODE_ANALYSIS ?
+  new SpeedMeasurePlugin() :
+  ({
+    wrap: res => res
+  })
 
 module.exports = webpackMerge(baseConfig, {
   mode: 'production',
@@ -55,7 +64,7 @@ module.exports = webpackMerge(baseConfig, {
     splitChunks: {
       // chunks: 'all',
       // name: false,
-      // // automaticNamePrefix: 'general-prefix',
+      // automaticNamePrefix: 'general-prefix',
       // automaticNameDelimiter: '-',
       // automaticNameMaxLength: 100,
       minChunks: 2,
@@ -80,5 +89,12 @@ module.exports = webpackMerge(baseConfig, {
       filename: 'css/[name].[contenthash].css',
     }),
     new OptimizeWebpack(),
-  ],
+  ].concat(
+    process.env.NODE_ANALYSIS ? [
+      new BundleAnalyzerPlugin(),
+      new DuplicatePackageCheckerPlugin(),
+    ] : []
+  ),
 });
+
+module.exports = smp(module.exports)
