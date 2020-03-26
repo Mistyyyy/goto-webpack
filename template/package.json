@@ -38,7 +38,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config ./webpackConfig/webpack.dev.config.js",
-    "build": "webpack --config ./webpackConfig/webpack.prod.config.js"
+    "build": "webpack --config ./webpackConfig/webpack.prod.config.js",
+    "analysis": "cross-env NODE_ANALYSIS=true webpack --config ./webpackConfig/webpack.prod.config.js --progress "
   },
   "keywords": [],
   "author": "",
@@ -47,5 +48,10 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "duplicate-package-checker-webpack-plugin": "^3.0.0",
+    "speed-measure-webpack-plugin": "^1.3.3",
+    "webpack-bundle-analyzer": "^3.6.1"
   }
 }
