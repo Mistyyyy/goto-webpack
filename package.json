@@ -8,7 +8,7 @@
     "inquirer": "^7.1.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "changelog": "cp package.json _package.json &&preset=`conventional-commits-detector` && echo $preset && bump=`conventional-recommended-bump -p angular` && echo ${1:-$bump} && npm --no-git-tag-version version ${1:-$bump} &>/dev/null && conventional-changelog -i CHANGELOG.md -s -p ${2:-$preset} && git add CHANGELOG.md package.json package-lock.json && version=`cat package.json` && git commit -m'docs(CHANGELOG): $version' && mv -f _package.json package.json && npm version ${1:-$bump} -m 'chore(release): %s' && git push --follow-tags "
   },
   "homepage": "https://github.com/Mistyyyy/goto-webpack",
@@ -27,7 +27,8 @@
     "@commitlint/config-conventional": "^8.3.4",
     "conventional-changelog": "^3.1.18",
     "cz-conventional-changelog": "^3.1.0",
-    "husky": "^4.2.3"
+    "husky": "^4.2.3",
+    "jest": "^25.2.3"
   },
   "config": {
     "commitizen": {
