@@ -9,8 +9,7 @@ const { resolve, parse, join } = require("path");
 const USER_DIRECTORY = process.env.PWD ? process.env.PWD : process.cwd();
 const PRIJECT_NAME = parse(USER_DIRECTORY).name;
 const TEMPLATE_DIRECTORY = resolve(__dirname, "template");
-const QUESTIONS = [
-  {
+const QUESTIONS = [{
     type: "input",
     prefix: c.greenBright(">"),
     default: "",
@@ -50,6 +49,7 @@ const READ_FILE_LIST = [
   ".gitignore",
   ".prettierrc.js",
   ".prettierignore",
+  join("test", "index.test.js"),
   "webpack.base.config.js",
   "webpack.dev.config.js",
   "webpack.prod.config.js",
@@ -61,6 +61,17 @@ const CONFIG_FILE_LIST = [
   "webpack.prod.config.js",
   "openBrowser.js"
 ];
+
+const TEST_FILE_LIST = [
+  "index.jest.js"
+]
+
+const dirmap = new Map(
+  [
+    ['webpackConfig', CONFIG_FILE_LIST],
+    ['test', TEST_FILE_LIST]
+  ]
+)
 
 const write = (files, callback) => {
   files.forEach(([file, content]) => {
@@ -96,8 +107,9 @@ function scaffold(answers) {
   try {
     fs.mkdirSync("webpackConfig");
     fs.mkdirSync("src");
+    fs.mkdirSync("test");
   } catch {
-    info("The webpackConfig and src dir has existed");
+    info("The webpackConfig or src or test dir has existed");
   }
 
   fs.writeFileSync(resolveUser("./src/index.js"), JSON.stringify());
@@ -106,8 +118,9 @@ function scaffold(answers) {
     JSON.stringify(packageJSON, null, 2)
   );
   write(readFileResult, file => {
-    if (CONFIG_FILE_LIST.includes(file))
-      return join(CURRENT_PREFIX, "webpackConfig", file);
+    for (const [dir, list] of dirmap) {
+      if (list.includes(file)) return join(CURRENT_PREFIX, dir, file);
+    }
   });
   done();
 }
