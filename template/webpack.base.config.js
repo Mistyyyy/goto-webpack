@@ -13,7 +13,8 @@ module.exports = {
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.less/,
         use: ['style-loader', 'css-loader', 'less-loader'],
       },
@@ -24,7 +25,7 @@ module.exports = {
       },
       {
         test: /\.ejs$/,
-        use: ['ejs-loader']
+        use: ['ejs-loader'],
       },
       {
         test: /\.(png|jpg|jpeg|gif|eot|svg|ttf|woff|mp4|xlsx|xls)$/,
@@ -43,5 +44,10 @@ module.exports = {
     mainFiles: ['index'],
   },
 
-  plugins: [new CleanWebpackPlugin(), new HtmlWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+    }),
+  ],
 };

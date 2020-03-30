@@ -43,6 +43,7 @@ const read = list =>
     fs.readFileSync(resolveTemplate(join(CURRENT_PREFIX, filename))).toString()
   ]);
 const READ_FILE_LIST = [
+  'index.html',
   ".babelrc",
   ".editorconfig",
   ".eslintrc.js",
