@@ -4,7 +4,7 @@ const openBrowser = require('./openBrowser');
 const baseConfig = require('./webpack.base.config');
 
 process.env.HOST = '0.0.0.0';
-process.env.port = 10000;
+process.env.PORT = 10000;
 
 module.exports = webpackMerge(baseConfig, {
   mode: 'development',
