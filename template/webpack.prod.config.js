@@ -6,10 +6,12 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const baseConfig = require('./webpack.base.config');
 
+const identity = d => d;
+
 const smp = process.env.NODE_ANALYSIS ?
   new SpeedMeasurePlugin() :
   ({
-    wrap: res => res
+    wrap: identity
   })
 
 module.exports = webpackMerge(baseConfig, {
