@@ -128,7 +128,7 @@ function scaffold(answers) {
 
 function install() {
   info("Installing Dependencies");
-  l(c.gray("  May take few minutes..."));
+  l(c.gray("May take few minutes..."));
   try {
     execSync(`cd ${USER_DIRECTORY} && yarn install`, { stdio: [0, 1, 2] });
   } catch (err) {
