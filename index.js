@@ -47,6 +47,7 @@ const READ_FILE_LIST = [
   ".babelrc",
   ".editorconfig",
   ".eslintrc.js",
+  '.eslintignore',
   ".gitignore",
   ".prettierrc.js",
   ".prettierignore",
